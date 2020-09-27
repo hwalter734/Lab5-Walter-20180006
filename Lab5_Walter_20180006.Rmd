@@ -80,6 +80,7 @@ llamadas <- df_final %>%
   group_by(mes) %>%
   summarise(total = n()) %>%
   arrange(-total)
+llamadas
 ```
 En el mes de marzo
 
@@ -91,6 +92,7 @@ dia_ocupado <- df_final %>%
   group_by(dia) %>%
   summarise(total = n()) %>%
   arrange(-total)
+dia_ocupado
 ```
 El día lunes es el día más ocupado.
 
@@ -102,17 +104,17 @@ mes_ocupado <- df_final %>%
   group_by(mes) %>%
   summarise(total = n()) %>%
   arrange(-total)
+mes_ocupado
 ```
 El mes más ocupado es el mes de marzo
 
 ## Inciso 4
 ¿Existe una concentración o estacionalidad en la cantidad de llamadas?
 ```{r cache=TRUE, message=FALSE, warning=FALSE}
-mes_ocupado <- df_final %>%
-  mutate(mes = format(`Fecha Creación`, "%m")) %>%
-  group_by(mes) %>%
-  summarise(total = n()) %>%
-  arrange(-total)
+estacionalidad <- ggplot(llamadas, aes(x=mes, y=total, group=1)) +
+  geom_line(color = "Blue")+
+  geom_point()
+estacionalidad
 ```
 Vemos que el período entre los meses de Marzo y Julio existe una estacionalidad. Se puede decir que es entre primavera y verano.
 
